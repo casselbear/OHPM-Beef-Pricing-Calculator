@@ -9,34 +9,33 @@ This is a custom React calculator designed for Shopify integration.
    - Log in to [Vercel](https://vercel.com).
    - Click **Add New > Project**.
    - Import the repository you just created.
-3. **Configuration**: 
-   - The project is already configured with a `vercel.json` file.
-   - This file handles the security headers (CSP) required to allow Shopify to embed the calculator in an iframe.
-4. **Deploy**: Click **Deploy**.
-5. **Update Shopify**: Once deployed, copy your new Vercel URL (e.g., `https://your-project.vercel.app`) and use it in the Shopify iframe code.
+3. **Deploy**: Click **Deploy**.
+4. **Get the JS URL**: Once deployed, your JavaScript file will be at: `https://your-project.vercel.app/assets/beef-calculator.js`
 
-## Shopify Integration Code
+## Shopify Integration (Native Method - No Iframe)
 
-Use this code in a **Custom Liquid** or **Custom HTML** block:
+This method is much more reliable than an iframe. It runs the calculator directly on your Shopify page.
+
+1. In Shopify, go to **Online Store > Themes > Customize**.
+2. Add a **Custom Liquid** section.
+3. Paste the following code:
 
 ```html
-<div style="width: 100%; overflow: hidden;">
-  <iframe 
-    src="YOUR_VERCEL_URL_HERE" 
-    style="width: 1px; min-width: 100%; height: 600px; border: none; transition: height 0.2s ease;"
-    scrolling="no"
-    id="beef-calculator-iframe">
-  </iframe>
+<!-- Load the Calculator Script -->
+<script src="https://your-project.vercel.app/assets/beef-calculator.js" type="module"></script>
+
+<!-- Use the Custom Tag -->
+<div class="beef-calculator-container">
+  <beef-calculator></beef-calculator>
 </div>
 
-<script>
-  window.addEventListener('message', function(e) {
-    if (e.data && e.data.type === 'resize' && e.data.height) {
-      const iframe = document.getElementById('beef-calculator-iframe');
-      if (iframe) {
-        iframe.style.height = (e.data.height + 20) + 'px';
-      }
-    }
-  }, false);
-</script>
+<style>
+  .beef-calculator-container {
+    width: 100%;
+    margin: 0 auto;
+    max-width: 1200px; /* Adjust as needed */
+  }
+</style>
 ```
+
+*Note: Replace `https://your-project.vercel.app` with your actual Vercel deployment URL.*
