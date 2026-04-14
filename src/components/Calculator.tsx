@@ -108,120 +108,120 @@ export default function Calculator() {
   };
 
   return (
-    <div className="max-w-7xl mx-auto p-4 md:p-8 space-y-8 tk-brandon-grotesque">
+    <div className="max-w-7xl mx-auto p-4 md:p-8 space-y-8 tk-brandon-grotesque !text-foreground !antialiased">
       <div className="flex flex-col gap-8">
         {/* Input Section */}
-        <Card className="border-neutral-200 bg-white shadow-sm overflow-hidden py-0 gap-0 rounded-none">
-          <CardHeader className="bg-neutral-800 text-white px-6 py-4 rounded-none border-b-0">
-            <CardTitle className="flex items-center gap-2">
-              <CalcIcon className="w-5 h-5" />
+        <Card className="!border-neutral-200 !bg-white !shadow-sm !overflow-hidden !py-0 !gap-0 !rounded-none">
+          <CardHeader className="!bg-neutral-800 !text-white !px-6 !py-4 !rounded-none !border-b-0">
+            <CardTitle className="!flex !items-center !gap-2 !text-white !m-0 !p-0">
+              <CalcIcon className="!w-5 !h-5" />
               Animal & Processing
             </CardTitle>
-            <CardDescription className="text-white/60">
+            <CardDescription className="!text-white/60 !m-0 !p-0">
               Enter the base costs and weights for your animal.
             </CardDescription>
           </CardHeader>
-          <CardContent className="p-6 space-y-6">
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-              <div className="space-y-2">
-                <Label htmlFor="liveWeight" className="text-foreground font-bold uppercase tracking-wider text-xs">Live Weight (Pounds)</Label>
-                <div className="relative">
-                  <Weight className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-neutral-400" />
+          <CardContent className="!p-6 !space-y-6">
+            <div className="!grid !grid-cols-1 md:!grid-cols-3 !gap-6">
+              <div className="!space-y-2">
+                <Label htmlFor="liveWeight" className="!text-foreground !font-bold !uppercase !tracking-wider !text-xs">Live Weight (Pounds)</Label>
+                <div className="!relative !flex !items-center">
+                  <Weight className="!absolute !left-3 !w-4 !h-4 !text-neutral-400 !z-10" />
                   <Input
                     id="liveWeight"
                     type="number"
                     step="any"
                     value={liveWeight}
                     onChange={(e) => setLiveWeight(Number(e.target.value))}
-                    className="pl-10 border-neutral-200 focus-visible:ring-brand-red"
+                    className="!pl-10 !border-neutral-200 focus-visible:!ring-brand-red !bg-white !h-10 !w-full !rounded-none"
                   />
                 </div>
               </div>
-              <div className="space-y-2">
-                <Label htmlFor="animalCost" className="text-foreground font-bold uppercase tracking-wider text-xs">Animal Cost ($)</Label>
-                <div className="relative">
-                  <DollarSign className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-neutral-400" />
+              <div className="!space-y-2">
+                <Label htmlFor="animalCost" className="!text-foreground !font-bold !uppercase !tracking-wider !text-xs">Animal Cost ($)</Label>
+                <div className="!relative !flex !items-center">
+                  <DollarSign className="!absolute !left-3 !w-4 !h-4 !text-neutral-400 !z-10" />
                   <Input
                     id="animalCost"
                     type="number"
                     step="any"
                     value={animalCost}
                     onChange={(e) => setAnimalCost(Number(e.target.value))}
-                    className="pl-10 border-neutral-200 focus-visible:ring-brand-red"
+                    className="!pl-10 !border-neutral-200 focus-visible:!ring-brand-red !bg-white !h-10 !w-full !rounded-none"
                   />
                 </div>
               </div>
-              <div className="space-y-2">
-                <Label htmlFor="processingCost" className="text-foreground font-bold uppercase tracking-wider text-xs">Processing Cost ($)</Label>
-                <div className="relative">
-                  <DollarSign className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-neutral-400" />
+              <div className="!space-y-2">
+                <Label htmlFor="processingCost" className="!text-foreground !font-bold !uppercase !tracking-wider !text-xs">Processing Cost ($)</Label>
+                <div className="!relative !flex !items-center">
+                  <DollarSign className="!absolute !left-3 !w-4 !h-4 !text-neutral-400 !z-10" />
                   <Input
                     id="processingCost"
                     type="number"
                     step="any"
                     value={processingCost}
                     onChange={(e) => setProcessingCost(Number(e.target.value))}
-                    className="pl-10 border-neutral-200 focus-visible:ring-brand-red"
+                    className="!pl-10 !border-neutral-200 focus-visible:!ring-brand-red !bg-white !h-10 !w-full !rounded-none"
                   />
                 </div>
               </div>
             </div>
 
-            <Separator className="bg-neutral-100" />
+            <Separator className="!bg-neutral-100" />
 
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-              <div className="p-3 bg-neutral-50 rounded-none border border-neutral-100">
-                <p className="text-xs text-foreground/60 uppercase font-bold tracking-wider">Total Direct Cost</p>
-                <p className="text-xl font-bold text-foreground">{formatCurrency(calculations.totalDirectCost)}</p>
+            <div className="!grid !grid-cols-1 md:!grid-cols-3 !gap-4">
+              <div className="!p-4 !bg-neutral-50 !rounded-none !border !border-neutral-100">
+                <p className="!text-xs !text-foreground/60 !uppercase !font-bold !tracking-wider !m-0">Total Direct Cost</p>
+                <p className="!text-2xl !font-bold !text-foreground !m-0">{formatCurrency(calculations.totalDirectCost)}</p>
               </div>
-              <div className="p-3 bg-neutral-50 rounded-none border border-neutral-100">
-                <p className="text-xs text-foreground/60 uppercase font-bold tracking-wider">Saleable Weight</p>
-                <p className="text-xl font-bold text-foreground">{calculations.saleableWeight.toFixed(2)} lbs</p>
+              <div className="!p-4 !bg-neutral-50 !rounded-none !border !border-neutral-100">
+                <p className="!text-xs !text-foreground/60 !uppercase !font-bold !tracking-wider !m-0">Saleable Weight</p>
+                <p className="!text-2xl !font-bold !text-foreground !m-0">{calculations.saleableWeight.toFixed(2)} lbs</p>
               </div>
-              <div className="p-3 bg-neutral-50 rounded-none border border-neutral-100">
-                <p className="text-xs text-foreground/60 uppercase font-bold tracking-wider">% Yield (Saleable/Live)</p>
-                <p className="text-xl font-bold text-foreground">{formatPercent(calculations.yieldPercentage)}</p>
+              <div className="!p-4 !bg-neutral-50 !rounded-none !border !border-neutral-100">
+                <p className="!text-xs !text-foreground/60 !uppercase !font-bold !tracking-wider !m-0">% Yield (Saleable/Live)</p>
+                <p className="!text-2xl !font-bold !text-foreground !m-0">{formatPercent(calculations.yieldPercentage)}</p>
               </div>
             </div>
           </CardContent>
         </Card>
 
         {/* Cuts Table Section */}
-        <Card className="border-neutral-200 bg-white shadow-sm overflow-hidden flex flex-col py-0 gap-0 rounded-none">
-          <CardHeader className="bg-neutral-800 text-white flex flex-col md:flex-row items-start md:items-center justify-between px-6 py-4 rounded-none border-b-0 gap-4">
-            <div className="w-full">
-              <CardTitle>Meat Cuts & Pricing</CardTitle>
-              <CardDescription className="text-white/60">
+        <Card className="!border-neutral-200 !bg-white !shadow-sm !overflow-hidden !flex !flex-col !py-0 !gap-0 !rounded-none">
+          <CardHeader className="!bg-neutral-800 !text-white !flex !flex-col md:!flex-row !items-start md:!items-center !justify-between !px-6 !py-4 !rounded-none !border-b-0 !gap-4">
+            <div className="!w-full">
+              <CardTitle className="!text-white !m-0 !p-0">Meat Cuts & Pricing</CardTitle>
+              <CardDescription className="!text-white/60 !m-0 !p-0">
                 Adjust pounds and retail prices for each cut.
               </CardDescription>
             </div>
-            <div className="flex gap-2 w-full md:w-auto">
+            <div className="!flex !gap-2 !w-full md:!w-auto">
               <Button 
                 onClick={handleAddCut} 
                 variant="outline" 
-                className="flex-1 md:flex-none bg-brand-red hover:bg-brand-red/90 border-none text-white font-bold rounded-none"
+                className="!flex-1 md:!flex-none !bg-brand-red hover:!bg-brand-red/90 !border-none !text-white !font-bold !rounded-none"
               >
-                <Plus className="w-4 h-4 mr-2" /> Add Cut
+                <Plus className="!w-4 !h-4 !mr-2" /> Add Cut
               </Button>
               <Button 
                 onClick={() => setCuts(INITIAL_CUTS)} 
                 variant="outline" 
-                className="flex-1 md:flex-none bg-white/10 hover:bg-white/20 border-white/20 text-white rounded-none"
+                className="!flex-1 md:!flex-none !bg-white/10 hover:!bg-white/20 !border-white/20 !text-white !rounded-none"
               >
                 Reset
               </Button>
             </div>
           </CardHeader>
-          <CardContent className="p-0 flex-1">
-            <Table>
-              <TableHeader className="bg-neutral-50">
-                <TableRow className="hover:bg-transparent border-neutral-200">
-                    <TableHead className="text-foreground font-bold w-[200px] uppercase tracking-wider text-xs">Cut Name</TableHead>
-                    <TableHead className="text-foreground font-bold text-right uppercase tracking-wider text-xs">Pounds</TableHead>
-                    <TableHead className="text-foreground font-bold text-right uppercase tracking-wider text-xs">Price/Lb</TableHead>
-                    <TableHead className="text-foreground font-bold text-right uppercase tracking-wider text-xs">Price/Animal</TableHead>
-                    <TableHead className="text-foreground font-bold text-right uppercase tracking-wider text-xs">COGS</TableHead>
-                    <TableHead className="w-[50px]"></TableHead>
+          <CardContent className="!p-0 !flex-1">
+            <Table className="!w-full">
+              <TableHeader className="!bg-neutral-50">
+                <TableRow className="hover:!bg-transparent !border-neutral-200">
+                    <TableHead className="!text-foreground !font-bold !w-[200px] !uppercase !tracking-wider !text-xs">Cut Name</TableHead>
+                    <TableHead className="!text-foreground !font-bold !text-right !uppercase !tracking-wider !text-xs">Pounds</TableHead>
+                    <TableHead className="!text-foreground !font-bold !text-right !uppercase !tracking-wider !text-xs">Price/Lb</TableHead>
+                    <TableHead className="!text-foreground !font-bold !text-right !uppercase !tracking-wider !text-xs">Price/Animal</TableHead>
+                    <TableHead className="!text-foreground !font-bold !text-right !uppercase !tracking-wider !text-xs">COGS</TableHead>
+                    <TableHead className="!w-[50px]"></TableHead>
                   </TableRow>
                 </TableHeader>
                 <TableBody>
@@ -233,47 +233,47 @@ export default function Calculator() {
                         initial={{ opacity: 0, y: 10 }}
                         animate={{ opacity: 1, y: 0 }}
                         exit={{ opacity: 0, scale: 0.95 }}
-                        className="group border-neutral-100 hover:bg-neutral-50 transition-colors"
+                        className="!group !border-neutral-100 hover:!bg-neutral-50 !transition-colors"
                       >
-                        <TableCell className="p-2">
+                        <TableCell className="!p-2">
                           <Input
                             value={cut.name}
                             onChange={(e) => handleUpdateCut(cut.id, 'name', e.target.value)}
-                            className="h-9 border-neutral-200 focus-visible:ring-brand-red bg-white rounded-none"
+                            className="!h-9 !border-neutral-200 focus-visible:!ring-brand-red !bg-white !rounded-none !w-full"
                           />
                         </TableCell>
-                        <TableCell className="p-2 text-right">
+                        <TableCell className="!p-2 !text-right">
                           <Input
                             type="number"
                             step="any"
                             value={cut.pounds}
                             onChange={(e) => handleUpdateCut(cut.id, 'pounds', Number(e.target.value))}
-                            className="h-9 w-24 ml-auto text-right border-neutral-200 focus-visible:ring-brand-red bg-white rounded-none"
+                            className="!h-9 !w-24 !ml-auto !text-right !border-neutral-200 focus-visible:!ring-brand-red !bg-white !rounded-none"
                           />
                         </TableCell>
-                        <TableCell className="p-2 text-right">
+                        <TableCell className="!p-2 !text-right">
                           <Input
                             type="number"
                             step="any"
                             value={cut.pricePerLb}
                             onChange={(e) => handleUpdateCut(cut.id, 'pricePerLb', Number(e.target.value))}
-                            className="h-9 w-24 ml-auto text-right border-neutral-200 focus-visible:ring-brand-red bg-white rounded-none"
+                            className="!h-9 !w-24 !ml-auto !text-right !border-neutral-200 focus-visible:!ring-brand-red !bg-white !rounded-none"
                           />
                         </TableCell>
-                        <TableCell className="p-2 text-right font-medium text-foreground">
+                        <TableCell className="!p-2 !text-right !font-medium !text-foreground">
                           {formatCurrency(cut.pricePerAnimal)}
                         </TableCell>
-                        <TableCell className="p-2 text-right text-neutral-500 text-sm">
+                        <TableCell className="!p-2 !text-right !text-neutral-500 !text-sm">
                           {formatCurrency(cut.cogs)}
                         </TableCell>
-                        <TableCell className="p-2 text-right">
+                        <TableCell className="!p-2 !text-right">
                           <Button
                             variant="ghost"
                             size="icon"
                             onClick={() => handleRemoveCut(cut.id)}
-                            className="h-8 w-8 text-neutral-400 hover:text-red-500 hover:bg-red-50 rounded-none"
+                            className="!h-8 !w-8 !text-neutral-400 hover:!text-red-500 hover:!bg-red-50 !rounded-none"
                           >
-                            <Trash2 className="w-4 h-4" />
+                            <Trash2 className="!w-4 !h-4" />
                           </Button>
                         </TableCell>
                       </motion.tr>
@@ -282,23 +282,23 @@ export default function Calculator() {
                 </TableBody>
               </Table>
           </CardContent>
-          <div className="bg-neutral-800 text-white p-6">
-            <div className="flex flex-col md:flex-row justify-between items-start md:items-center px-4 gap-6 md:gap-0">
-              <div className="text-left w-full md:w-auto">
-                <p className="text-xs text-white/60 uppercase font-bold tracking-wider">Total Retail Value</p>
-                <p className="text-3xl font-bold">{formatCurrency(calculations.totalRetailPrice)}</p>
+          <div className="!bg-neutral-800 !text-white !p-6">
+            <div className="!flex !flex-col md:!flex-row !justify-between !items-start md:!items-center !px-4 !gap-6 md:!gap-0">
+              <div className="!text-left !w-full md:!w-auto">
+                <p className="!text-xs !text-white/60 !uppercase !font-bold !tracking-wider !m-0">Total Retail Value</p>
+                <p className="!text-3xl !font-bold !m-0">{formatCurrency(calculations.totalRetailPrice)}</p>
               </div>
-              <div className="text-left md:text-right w-full md:w-auto">
-                <p className="text-xs text-white/60 uppercase font-bold tracking-wider">
+              <div className="!text-left md:!text-right !w-full md:!w-auto">
+                <p className="!text-xs !text-white/60 !uppercase !font-bold !tracking-wider !m-0">
                   {calculations.profitLoss >= 0 ? 'Estimated Profit' : 'Estimated Loss'}
                 </p>
-                <div className="flex items-center justify-start md:justify-end gap-2">
+                <div className="!flex !items-center !justify-start md:!justify-end !gap-2">
                   {calculations.profitLoss >= 0 ? (
-                    <TrendingUp className="w-6 h-6 text-green-500" />
+                    <TrendingUp className="!w-6 !h-6 !text-green-500" />
                   ) : (
-                    <TrendingDown className="w-6 h-6 text-brand-red" />
+                    <TrendingDown className="!w-6 !h-6 !text-brand-red" />
                   )}
-                  <p className={`text-3xl font-bold ${calculations.profitLoss >= 0 ? 'text-green-500' : 'text-brand-red'}`}>
+                  <p className={`!text-3xl !font-bold ${calculations.profitLoss >= 0 ? '!text-green-500' : '!text-brand-red'} !m-0`}>
                     {formatCurrency(calculations.profitLoss)}
                   </p>
                 </div>
