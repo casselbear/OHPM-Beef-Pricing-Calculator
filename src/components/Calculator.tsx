@@ -109,9 +109,9 @@ export default function Calculator() {
 
   return (
     <div className="max-w-7xl mx-auto p-4 md:p-8 space-y-8 tk-brandon-grotesque">
-      <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+      <div className="flex flex-col gap-8">
         {/* Input Section */}
-        <Card className="lg:col-span-1 border-neutral-200 bg-white shadow-sm overflow-hidden py-0 gap-0 rounded-none">
+        <Card className="border-neutral-200 bg-white shadow-sm overflow-hidden py-0 gap-0 rounded-none">
           <CardHeader className="bg-neutral-800 text-white px-6 py-4 rounded-none border-b-0">
             <CardTitle className="flex items-center gap-2">
               <CalcIcon className="w-5 h-5" />
@@ -122,52 +122,54 @@ export default function Calculator() {
             </CardDescription>
           </CardHeader>
           <CardContent className="p-6 space-y-6">
-            <div className="space-y-2">
-              <Label htmlFor="liveWeight" className="text-foreground font-bold uppercase tracking-wider text-xs">Live Weight (Pounds)</Label>
-              <div className="relative">
-                <Weight className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-neutral-400" />
-                <Input
-                  id="liveWeight"
-                  type="number"
-                  step="any"
-                  value={liveWeight}
-                  onChange={(e) => setLiveWeight(Number(e.target.value))}
-                  className="pl-10 border-neutral-200 focus-visible:ring-brand-red"
-                />
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+              <div className="space-y-2">
+                <Label htmlFor="liveWeight" className="text-foreground font-bold uppercase tracking-wider text-xs">Live Weight (Pounds)</Label>
+                <div className="relative">
+                  <Weight className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-neutral-400" />
+                  <Input
+                    id="liveWeight"
+                    type="number"
+                    step="any"
+                    value={liveWeight}
+                    onChange={(e) => setLiveWeight(Number(e.target.value))}
+                    className="pl-10 border-neutral-200 focus-visible:ring-brand-red"
+                  />
+                </div>
               </div>
-            </div>
-            <div className="space-y-2">
-              <Label htmlFor="animalCost" className="text-foreground font-bold uppercase tracking-wider text-xs">Animal Cost ($)</Label>
-              <div className="relative">
-                <DollarSign className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-neutral-400" />
-                <Input
-                  id="animalCost"
-                  type="number"
-                  step="any"
-                  value={animalCost}
-                  onChange={(e) => setAnimalCost(Number(e.target.value))}
-                  className="pl-10 border-neutral-200 focus-visible:ring-brand-red"
-                />
+              <div className="space-y-2">
+                <Label htmlFor="animalCost" className="text-foreground font-bold uppercase tracking-wider text-xs">Animal Cost ($)</Label>
+                <div className="relative">
+                  <DollarSign className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-neutral-400" />
+                  <Input
+                    id="animalCost"
+                    type="number"
+                    step="any"
+                    value={animalCost}
+                    onChange={(e) => setAnimalCost(Number(e.target.value))}
+                    className="pl-10 border-neutral-200 focus-visible:ring-brand-red"
+                  />
+                </div>
               </div>
-            </div>
-            <div className="space-y-2">
-              <Label htmlFor="processingCost" className="text-foreground font-bold uppercase tracking-wider text-xs">Processing Cost ($)</Label>
-              <div className="relative">
-                <DollarSign className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-neutral-400" />
-                <Input
-                  id="processingCost"
-                  type="number"
-                  step="any"
-                  value={processingCost}
-                  onChange={(e) => setProcessingCost(Number(e.target.value))}
-                  className="pl-10 border-neutral-200 focus-visible:ring-brand-red"
-                />
+              <div className="space-y-2">
+                <Label htmlFor="processingCost" className="text-foreground font-bold uppercase tracking-wider text-xs">Processing Cost ($)</Label>
+                <div className="relative">
+                  <DollarSign className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-neutral-400" />
+                  <Input
+                    id="processingCost"
+                    type="number"
+                    step="any"
+                    value={processingCost}
+                    onChange={(e) => setProcessingCost(Number(e.target.value))}
+                    className="pl-10 border-neutral-200 focus-visible:ring-brand-red"
+                  />
+                </div>
               </div>
             </div>
 
             <Separator className="bg-neutral-100" />
 
-            <div className="grid grid-cols-2 gap-4">
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
               <div className="p-3 bg-neutral-50 rounded-none border border-neutral-100">
                 <p className="text-xs text-foreground/60 uppercase font-bold tracking-wider">Total Direct Cost</p>
                 <p className="text-xl font-bold text-foreground">{formatCurrency(calculations.totalDirectCost)}</p>
@@ -176,7 +178,7 @@ export default function Calculator() {
                 <p className="text-xs text-foreground/60 uppercase font-bold tracking-wider">Saleable Weight</p>
                 <p className="text-xl font-bold text-foreground">{calculations.saleableWeight.toFixed(2)} lbs</p>
               </div>
-              <div className="p-3 bg-neutral-50 rounded-none border border-neutral-100 col-span-2">
+              <div className="p-3 bg-neutral-50 rounded-none border border-neutral-100">
                 <p className="text-xs text-foreground/60 uppercase font-bold tracking-wider">% Yield (Saleable/Live)</p>
                 <p className="text-xl font-bold text-foreground">{formatPercent(calculations.yieldPercentage)}</p>
               </div>
@@ -185,7 +187,7 @@ export default function Calculator() {
         </Card>
 
         {/* Cuts Table Section */}
-        <Card className="lg:col-span-2 border-neutral-200 bg-white shadow-sm overflow-hidden flex flex-col py-0 gap-0 rounded-none">
+        <Card className="border-neutral-200 bg-white shadow-sm overflow-hidden flex flex-col py-0 gap-0 rounded-none">
           <CardHeader className="bg-neutral-800 text-white flex flex-col md:flex-row items-start md:items-center justify-between px-6 py-4 rounded-none border-b-0 gap-4">
             <div className="w-full">
               <CardTitle>Meat Cuts & Pricing</CardTitle>
