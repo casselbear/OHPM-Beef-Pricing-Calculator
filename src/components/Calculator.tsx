@@ -5,7 +5,7 @@ import { Label } from '@/components/ui/label';
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table';
 import { Button } from '@/components/ui/button';
 import { Separator } from '@/components/ui/separator';
-import { Plus, Trash2, Calculator as CalcIcon, TrendingUp, TrendingDown, DollarSign, Weight } from 'lucide-react';
+import { Plus, Trash2, Calculator as CalcIcon, TrendingUp, TrendingDown, DollarSign, Weight, Download, FileSpreadsheet } from 'lucide-react';
 import { motion, AnimatePresence } from 'motion/react';
 
 interface MeatCut {
@@ -97,6 +97,57 @@ export default function Calculator() {
 
   const handleRemoveCut = (id: string) => {
     setCuts(prev => prev.filter(cut => cut.id !== id));
+  };
+
+  const handleExportCSV = () => {
+    // CSV Header row
+    const headers = ['Cut Name', 'Pounds', 'Price/Lb', 'Price/Animal', '% of Total Price', 'Total $ of Cost', 'COGS'];
+    
+    // Summary info
+    const summary = [
+      ['SUMMARY DATA', ''],
+      ['Animal Cost', animalCost],
+      ['Processing Cost', processingCost],
+      ['Live Weight', liveWeight],
+      ['Total Direct Cost', calculations.totalDirectCost.toFixed(2)],
+      ['Saleable Weight', calculations.saleableWeight.toFixed(2)],
+      ['Yield Percentage', calculations.yieldPercentage.toFixed(2) + '%'],
+      ['Total Retail Price', calculations.totalRetailPrice.toFixed(2)],
+      ['Total Profit/Loss', calculations.profitLoss.toFixed(2)],
+      [], // empty row for separation
+      ['MEAT CUTS DATA', ''],
+    ];
+
+    // Data rows for cuts
+    const rows = calculations.cuts.map(cut => [
+      `"${cut.name.replace(/"/g, '""')}"`, // Quote strings and escape existing quotes
+      cut.pounds,
+      cut.pricePerLb,
+      cut.pricePerAnimal.toFixed(2),
+      cut.percentOfTotalPrice.toFixed(2) + '%',
+      cut.totalDollarOfCost.toFixed(2),
+      cut.cogs.toFixed(2)
+    ]);
+
+    // Build CSV string
+    const csvContent = [
+      ...summary,
+      headers,
+      ...rows
+    ].map(row => row.join(',')).join('\n');
+
+    // Create and trigger download
+    const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
+    const link = document.createElement('a');
+    if (link.download !== undefined) {
+      const url = URL.createObjectURL(blob);
+      link.setAttribute('href', url);
+      link.setAttribute('download', `beef_pricing_export_${new Date().toISOString().split('T')[0]}.csv`);
+      link.style.visibility = 'hidden';
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+    }
   };
 
   const formatCurrency = (value: number) => {
@@ -220,6 +271,8 @@ export default function Calculator() {
                     <TableHead className="!text-foreground !font-bold !text-right !uppercase !tracking-wider !text-xs">Pounds</TableHead>
                     <TableHead className="!text-foreground !font-bold !text-right !uppercase !tracking-wider !text-xs">Price/Lb</TableHead>
                     <TableHead className="!text-foreground !font-bold !text-right !uppercase !tracking-wider !text-xs">Price/Animal</TableHead>
+                    <TableHead className="!text-foreground !font-bold !text-right !uppercase !tracking-wider !text-xs">% of Total Price</TableHead>
+                    <TableHead className="!text-foreground !font-bold !text-right !uppercase !tracking-wider !text-xs">Total $ of Cost</TableHead>
                     <TableHead className="!text-foreground !font-bold !text-right !uppercase !tracking-wider !text-xs">COGS</TableHead>
                     <TableHead className="!w-[50px]"></TableHead>
                   </TableRow>
@@ -264,6 +317,12 @@ export default function Calculator() {
                           {formatCurrency(cut.pricePerAnimal)}
                         </TableCell>
                         <TableCell className="!p-2 !text-right !text-neutral-500 !text-sm">
+                          {formatPercent(cut.percentOfTotalPrice)}
+                        </TableCell>
+                        <TableCell className="!p-2 !text-right !text-neutral-500 !text-sm">
+                          {formatCurrency(cut.totalDollarOfCost)}
+                        </TableCell>
+                        <TableCell className="!p-2 !text-right !text-neutral-500 !text-sm">
                           {formatCurrency(cut.cogs)}
                         </TableCell>
                         <TableCell className="!p-2 !text-right">
@@ -303,6 +362,16 @@ export default function Calculator() {
                   </p>
                 </div>
               </div>
+            </div>
+            
+            <div className="!mt-8 !flex !justify-center md:!justify-end !px-4">
+              <Button 
+                onClick={handleExportCSV} 
+                className="!bg-white !text-neutral-800 hover:!bg-neutral-100 !font-bold !rounded-none !px-8 !h-12 !flex !items-center !gap-2 !transition-all !border-0"
+              >
+                <Download className="!w-5 !h-5" />
+                Export Spreadsheet (CSV)
+              </Button>
             </div>
           </div>
         </Card>
