@@ -36,10 +36,10 @@ const INITIAL_CUTS: MeatCut[] = [
 ];
 
 export default function Calculator() {
-  const [liveWeight, setLiveWeight] = useState<number>(1400);
-  const [processingCost, setProcessingCost] = useState<number>(800);
-  const [animalCost, setAnimalCost] = useState<number>(3500);
-  const [cuts, setCuts] = useState<MeatCut[]>(INITIAL_CUTS);
+  const [liveWeight, setLiveWeight] = useState<number>(0);
+  const [processingCost, setProcessingCost] = useState<number>(0);
+  const [animalCost, setAnimalCost] = useState<number>(0);
+  const [cuts, setCuts] = useState<MeatCut[]>(INITIAL_CUTS.map(cut => ({ ...cut, pounds: 0, pricePerLb: 0 })));
 
   const calculations = useMemo(() => {
     const totalDirectCost = processingCost + animalCost;
@@ -255,7 +255,7 @@ export default function Calculator() {
                 <Plus className="!w-4 !h-4 !mr-2" /> Add Cut
               </Button>
               <Button 
-                onClick={() => setCuts(INITIAL_CUTS)} 
+                onClick={() => setCuts(INITIAL_CUTS.map(cut => ({ ...cut, pounds: 0, pricePerLb: 0 })))} 
                 variant="outline" 
                 className="!flex-1 md:!flex-none !bg-white/10 hover:!bg-white/20 !border-white/20 !text-white !rounded-none"
               >
