@@ -183,6 +183,7 @@ export default function Calculator() {
                     type="number"
                     step="any"
                     value={liveWeight}
+                    onFocus={(e) => e.target.select()}
                     onChange={(e) => setLiveWeight(Number(e.target.value))}
                     className="!pl-10 !border-neutral-200 focus-visible:!ring-brand-red !bg-white !h-10 !w-full !rounded-none"
                   />
@@ -197,6 +198,7 @@ export default function Calculator() {
                     type="number"
                     step="any"
                     value={animalCost}
+                    onFocus={(e) => e.target.select()}
                     onChange={(e) => setAnimalCost(Number(e.target.value))}
                     className="!pl-10 !border-neutral-200 focus-visible:!ring-brand-red !bg-white !h-10 !w-full !rounded-none"
                   />
@@ -211,6 +213,7 @@ export default function Calculator() {
                     type="number"
                     step="any"
                     value={processingCost}
+                    onFocus={(e) => e.target.select()}
                     onChange={(e) => setProcessingCost(Number(e.target.value))}
                     className="!pl-10 !border-neutral-200 focus-visible:!ring-brand-red !bg-white !h-10 !w-full !rounded-none"
                   />
@@ -291,6 +294,7 @@ export default function Calculator() {
                         <TableCell className="!p-2">
                           <Input
                             value={cut.name}
+                            onFocus={(e) => e.target.select()}
                             onChange={(e) => handleUpdateCut(cut.id, 'name', e.target.value)}
                             className="!h-9 !border-neutral-200 focus-visible:!ring-brand-red !bg-white !rounded-none !w-full"
                           />
@@ -300,6 +304,7 @@ export default function Calculator() {
                             type="number"
                             step="any"
                             value={cut.pounds}
+                            onFocus={(e) => e.target.select()}
                             onChange={(e) => handleUpdateCut(cut.id, 'pounds', Number(e.target.value))}
                             className="!h-9 !w-24 !ml-auto !text-right !border-neutral-200 focus-visible:!ring-brand-red !bg-white !rounded-none"
                           />
@@ -309,6 +314,7 @@ export default function Calculator() {
                             type="number"
                             step="any"
                             value={cut.pricePerLb}
+                            onFocus={(e) => e.target.select()}
                             onChange={(e) => handleUpdateCut(cut.id, 'pricePerLb', Number(e.target.value))}
                             className="!h-9 !w-24 !ml-auto !text-right !border-neutral-200 focus-visible:!ring-brand-red !bg-white !rounded-none"
                           />
