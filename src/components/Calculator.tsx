@@ -36,22 +36,28 @@ const INITIAL_CUTS: MeatCut[] = [
 ];
 
 export default function Calculator() {
-  const [liveWeight, setLiveWeight] = useState<number>(0);
-  const [processingCost, setProcessingCost] = useState<number>(0);
-  const [animalCost, setAnimalCost] = useState<number>(0);
+  const [liveWeight, setLiveWeight] = useState<number | string>(0);
+  const [processingCost, setProcessingCost] = useState<number | string>(0);
+  const [animalCost, setAnimalCost] = useState<number | string>(0);
   const [cuts, setCuts] = useState<MeatCut[]>(INITIAL_CUTS.map(cut => ({ ...cut, pounds: 0, pricePerLb: 0 })));
 
   const calculations = useMemo(() => {
-    const totalDirectCost = processingCost + animalCost;
-    const saleableWeight = cuts.reduce((sum, cut) => sum + cut.pounds, 0);
-    const yieldPercentage = liveWeight > 0 ? (saleableWeight / liveWeight) * 100 : 0;
+    const numLiveWeight = Number(liveWeight) || 0;
+    const numProcessingCost = Number(processingCost) || 0;
+    const numAnimalCost = Number(animalCost) || 0;
+
+    const totalDirectCost = numProcessingCost + numAnimalCost;
+    const saleableWeight = cuts.reduce((sum, cut) => sum + (Number(cut.pounds) || 0), 0);
+    const yieldPercentage = numLiveWeight > 0 ? (saleableWeight / numLiveWeight) * 100 : 0;
 
     const cutsWithCalculations = cuts.map(cut => {
-      const pricePerAnimal = cut.pounds * cut.pricePerLb;
+      const numPounds = Number(cut.pounds) || 0;
+      const numPricePerLb = Number(cut.pricePerLb) || 0;
+      const pricePerAnimal = numPounds * numPricePerLb;
       return {
         ...cut,
         pricePerAnimal,
-        yieldPercent: saleableWeight > 0 ? (cut.pounds / saleableWeight) * 100 : 0,
+        yieldPercent: saleableWeight > 0 ? (numPounds / saleableWeight) * 100 : 0,
       };
     });
 
@@ -184,7 +190,7 @@ export default function Calculator() {
                     step="any"
                     value={liveWeight}
                     onFocus={(e) => e.target.select()}
-                    onChange={(e) => setLiveWeight(Number(e.target.value))}
+                    onChange={(e) => setLiveWeight(e.target.value)}
                     className="!pl-10 !border-neutral-200 focus-visible:!ring-brand-red !bg-white !h-10 !w-full !rounded-none"
                   />
                 </div>
@@ -199,7 +205,7 @@ export default function Calculator() {
                     step="any"
                     value={animalCost}
                     onFocus={(e) => e.target.select()}
-                    onChange={(e) => setAnimalCost(Number(e.target.value))}
+                    onChange={(e) => setAnimalCost(e.target.value)}
                     className="!pl-10 !border-neutral-200 focus-visible:!ring-brand-red !bg-white !h-10 !w-full !rounded-none"
                   />
                 </div>
@@ -214,7 +220,7 @@ export default function Calculator() {
                     step="any"
                     value={processingCost}
                     onFocus={(e) => e.target.select()}
-                    onChange={(e) => setProcessingCost(Number(e.target.value))}
+                    onChange={(e) => setProcessingCost(e.target.value)}
                     className="!pl-10 !border-neutral-200 focus-visible:!ring-brand-red !bg-white !h-10 !w-full !rounded-none"
                   />
                 </div>
@@ -258,7 +264,12 @@ export default function Calculator() {
                 <Plus className="!w-4 !h-4 !mr-2" /> Add Cut
               </Button>
               <Button 
-                onClick={() => setCuts(INITIAL_CUTS.map(cut => ({ ...cut, pounds: 0, pricePerLb: 0 })))} 
+                onClick={() => {
+                  setLiveWeight(0);
+                  setAnimalCost(0);
+                  setProcessingCost(0);
+                  setCuts(INITIAL_CUTS.map(cut => ({ ...cut, pounds: 0, pricePerLb: 0 })));
+                }} 
                 variant="outline" 
                 className="!flex-1 md:!flex-none !bg-white/10 hover:!bg-white/20 !border-white/20 !text-white !rounded-none"
               >
@@ -305,19 +316,22 @@ export default function Calculator() {
                             step="any"
                             value={cut.pounds}
                             onFocus={(e) => e.target.select()}
-                            onChange={(e) => handleUpdateCut(cut.id, 'pounds', Number(e.target.value))}
+                            onChange={(e) => handleUpdateCut(cut.id, 'pounds', e.target.value)}
                             className="!h-9 !w-24 !ml-auto !text-right !border-neutral-200 focus-visible:!ring-brand-red !bg-white !rounded-none"
                           />
                         </TableCell>
                         <TableCell className="!p-2 !text-right">
-                          <Input
-                            type="number"
-                            step="any"
-                            value={cut.pricePerLb}
-                            onFocus={(e) => e.target.select()}
-                            onChange={(e) => handleUpdateCut(cut.id, 'pricePerLb', Number(e.target.value))}
-                            className="!h-9 !w-24 !ml-auto !text-right !border-neutral-200 focus-visible:!ring-brand-red !bg-white !rounded-none"
-                          />
+                          <div className="!relative !flex !items-center !justify-end">
+                            <DollarSign className="!absolute !right-[84px] !w-3 !h-3 !text-neutral-400 !z-10" />
+                            <Input
+                              type="number"
+                              step="any"
+                              value={cut.pricePerLb}
+                              onFocus={(e) => e.target.select()}
+                              onChange={(e) => handleUpdateCut(cut.id, 'pricePerLb', e.target.value)}
+                              className="!h-9 !w-24 !ml-auto !text-right !pl-6 !border-neutral-200 focus-visible:!ring-brand-red !bg-white !rounded-none"
+                            />
+                          </div>
                         </TableCell>
                         <TableCell className="!p-2 !text-right !font-medium !text-foreground">
                           {formatCurrency(cut.pricePerAnimal)}
